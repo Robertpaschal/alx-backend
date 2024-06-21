@@ -40,6 +40,10 @@ class Server:
         return self.__indexed_dataset
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
+        """
+        Retrieves info about a page from a given index and with a
+        specified size.
+        """
         assert isinstance(index, int) and index >= 0
         indexed_dataset = self.indexed_dataset()
         dataset_size = len(indexed_dataset)
