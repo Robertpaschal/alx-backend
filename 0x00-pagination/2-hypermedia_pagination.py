@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-This module contains a functin definiton and a
+This module contains a function definiton and a
 class with several methods
 """
 import csv
