@@ -7,7 +7,7 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 class FIFOCache(BaseCaching):
     """
-    This is a class that inherits from BasicCaching. 
+    This is a class that inherits from BasicCaching.
     It uses a dictionary for storing cache data with a FIFO
     (First-In, First-Out) eviction policy.
     """
@@ -22,8 +22,10 @@ class FIFOCache(BaseCaching):
         """
         Add an item in the cache.
             If key or item is None, this method should not do anything.
-            If the number of items in self.cache_data is higher than BaseCaching.MAX_ITEMS,
-            discard the first item put in cache (FIFO algorithm) and print DISCARD: <key>.
+            If the number of items in self.cache_data
+            is higher than BaseCaching.MAX_ITEMS,
+            discard the first item put in cache (FIFO algorithm)
+            and print DISCARD: <key>.
 
             Args:
                 key: the key to identify the item.
@@ -42,7 +44,8 @@ class FIFOCache(BaseCaching):
     def get(self, key):
         """
         Get an item by key.
-            If key is None or if the key doesn't exist in self.cache_data, return None.
+            If key is None or if the key doesn't exist in self.cache_data,
+            return None.
 
             Args:
                 key: the key to identify the item.
