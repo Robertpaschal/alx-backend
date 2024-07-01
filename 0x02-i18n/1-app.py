@@ -3,7 +3,7 @@
 Flask application Module
 with Babel for internationalization
 """
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 from flask_babel import Babel
 
 
@@ -18,7 +18,7 @@ class config:
 
 app: Flask = Flask(__name__)
 app.config.from_object(config)
-
+app.url_map.strict_slashes = False
 babel: Babel = Babel(app)
 
 
@@ -34,4 +34,4 @@ def index() -> str:
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='127.0.0.1', port=5000)
