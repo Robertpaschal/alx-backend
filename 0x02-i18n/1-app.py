@@ -3,7 +3,7 @@
 Flask application Module
 with Babel for internationalization
 """
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_babel import Babel
 
 
@@ -20,6 +20,7 @@ app: Flask = Flask(__name__)
 app.config.from_object(config)
 
 babel: Babel = Babel(app)
+
 
 @app.route('/')
 def index() -> str:
