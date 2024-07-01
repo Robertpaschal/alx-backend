@@ -3,7 +3,7 @@
 Flask application Module
 with Babel for internationalization
 """
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_babel import Babel
 
 
@@ -16,10 +16,18 @@ class config:
     BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
-app = Flask(__name__)
+app: Flask = Flask(__name__)
 app.config.from_object(config)
 app.url_map.strict_slashes = False
-babel = Babel(app)
+babel: Babel = Babel(app)
+
+
+@babel.localeselector
+def get_locale() -> str:
+    """
+    Determines the best match with our supported languages
+    """
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 @app.route('/')
