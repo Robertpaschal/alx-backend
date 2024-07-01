@@ -16,14 +16,14 @@ class config:
     BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
-app = Flask(__name__)
+app: Flask = Flask(__name__)
 app.config.from_object(config)
 app.url_map.strict_slashes = False
-babel = Babel(app)
+babel: Babel = Babel(app)
 
 
 @app.route('/')
-def index() -> str:
+def get_index() -> str:
     """
     Renders the index.html template.
 
