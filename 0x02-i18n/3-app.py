@@ -4,10 +4,10 @@ Flask application Module
 with Babel for internationalization
 """
 from flask import Flask, render_template, request
-from flask_babel import Babel
+from flask_babel import Babel, gettext as _
 
 
-class config:
+class Config:
     """
     Configuration class for the Flask app
     """
@@ -17,18 +17,17 @@ class config:
 
 
 app: Flask = Flask(__name__)
-app.config.from_object(config)
+app.config.from_object(Config)
 app.url_map.strict_slashes = False
-babel: Babel = Babel(app)
 
 
-@babel.localeselector
 def get_locale() -> str:
     """
     Determines the best match with our supported languages
     """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
+babel: Babel = Babel(app, locale_selector=get_locale)
 
 @app.route('/')
 def index() -> str:
@@ -38,7 +37,7 @@ def index() -> str:
     Returns:
         The rendered HTML content of index.html.
     """
-    return render_template('1-index.html')
+    return render_template('3-index.html')
 
 
 if __name__ == '__main__':
