@@ -19,6 +19,7 @@ class Config:
 app: Flask = Flask(__name__)
 app.config.from_object(Config)
 app.url_map.strict_slashes = False
+babel: Babel = Babel(app)
 
 
 def get_locale() -> str:
@@ -26,9 +27,6 @@ def get_locale() -> str:
     Determines the best match with our supported languages
     """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
-
-
-babel: Babel = Babel(app, locale_selector=get_locale)
 
 
 @app.route('/')
