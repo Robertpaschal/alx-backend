@@ -4,7 +4,7 @@ Flask application Module
 with Babel for internationalization
 """
 from flask import Flask, render_template, request
-from flask_babel import Babel, gettext as _
+from flask_babel import Babel
 
 
 class Config:
@@ -21,7 +21,7 @@ app.config.from_object(Config)
 app.url_map.strict_slashes = False
 babel: Babel = Babel(app)
 
-
+@babel.localeselector
 def get_locale() -> str:
     """
     Determines the best match with our supported languages
