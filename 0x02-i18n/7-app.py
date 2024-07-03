@@ -6,6 +6,8 @@ with Babel for internationalization
 from flask import Flask, render_template, request, g
 from flask_babel import Babel
 from typing import Union, Dict
+import pytz
+from pytz.exceptions import UnknownTimeZoneError
 
 
 class Config:
@@ -76,6 +78,34 @@ def get_locale() -> str:
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
+@babel.timezoneselector
+def get_timezone() -> str:
+    """
+    Determines the best match with our supported timezones.
+    Priority:
+    1. Timezone from URL parameters
+    2. Timezone from user settings
+    3. Default timezone (UTC)
+    """
+    timezone = request.args.get('timezone')
+    if timezone:
+        try:
+            pytz.timezone(timezone)
+            return timezone
+        except UnknownTimeZoneError:
+            pass
+
+    if g.user:
+        user_timezone = g.user.get('timezone')
+        if user_timezone:
+            try:
+                pytz.timezone(user_timezone)
+                return user_timezone
+            except UnknownTimeZoneError:
+                pass
+    return app.config['BABEL_DEFAULT_TIMEZONE']
+
+
 @app.route('/')
 def index() -> str:
     """
@@ -84,7 +114,7 @@ def index() -> str:
     Returns:
         The rendered HTML content of index.html.
     """
-    return render_template('6-index.html')
+    return render_template('5-index.html')
 
 
 if __name__ == '__main__':
