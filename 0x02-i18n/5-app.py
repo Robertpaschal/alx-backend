@@ -5,7 +5,7 @@ with Babel for internationalization
 """
 from flask import Flask, render_template, request, g
 from flask_babel import Babel
-from typing import  Union, Dict
+from typing import Union, Dict
 
 
 class Config:
@@ -28,6 +28,7 @@ users = {
     3: {"name": "Spock", "locale": "kg", "timezone": "Vulcan"},
     4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
 }
+
 
 def get_user() -> Union[Dict, None]:
     """
