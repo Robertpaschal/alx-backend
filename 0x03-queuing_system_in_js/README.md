@@ -1,5 +1,5 @@
 # Queuing System in JS
-In this project, some concepts associated with queing system in Javascript.
+In this project, I learnt some concepts associated with queing system in Javascript.
 
 ## Learning Objectives
 + How to run a Redis server on my machine
@@ -13,7 +13,7 @@ In this project, some concepts associated with queing system in Javascript.
 
 ## Tasks
 
-+ [0]. **Install a redis instance**<br/>
++ x **0. Install a redis instance**<br/>
 `mandatory`<br/>
 Download, extract, and compile the latest stable Redis version (higher than 5.0.7 - https://redis.io/downloads/):
 ```sh
@@ -47,11 +47,11 @@ Copy the `dump.rdb` from the `redis-5.0.7` directory into the root of the Queuin
 
 + Running `get Holberton` in the client, should return `School`
 
-+ [1.] **Node Redis Client**<br/>
++ [x] **1. Node Redis Client**<br/>
 `mandatory`<br/>
 Install [node_redis](https://github.com/redis/node-redis) using npm
 
-Using Babel and ES6, write a script named `0-redis_client.js`. It should connect to the Redis server running on your machine:
+Using Babel and ES6, write a script named [0-redis_client.js](0-redis_client.js). It should connect to the Redis server running on your machine:
 
 + It should log to the console the message `Redis client connected to the server` when the connection to Redis works correctly
 + It should log to the console the message `Redis client not connected to the server:` `ERROR_MESSAGE` when the connection to Redis does not work
@@ -95,5 +95,49 @@ bob@dylan:~$ npm run dev 0-redis_client.js
 [nodemon] starting `babel-node --presets @babel/preset-env 0-redis_client.js`
 Redis client connected to the server
 ^C
+bob@dylan:~$
+```
+
++ [x] **2. Node Redis client and basic operations**<br/>
+`mandatory`<br/>
+In a file [1-redis_op.js](1-redis_op.js), copy the code you previously wrote [0-redis_client.js](0-redis_client.js).<br/>
+
+Add two functions:<br/>
+
++ `setNewSchool`:
+++ It accepts two arguments `schoolName`, and `value`.<br/>
+++ It should set in Redis the value for the key `schoolName`<br/>
+++ It should display a confirmation message using `redis.print`<br/>
+
++ `displaySchoolValue`:
+++ It accepts one argument `schoolName`.<br/>
+++It should log to the console the value for the key passed as argument<br/>
+
+At the end of the file, call:
+
++ `displaySchoolValue('Holberton');`
++ `setNewSchool('HolbertonSanFrancisco', '100');`
++ `displaySchoolValue('HolbertonSanFrancisco');`
+
+**Requirements:**<br/>
+
++ Use callbacks for any of the operation, we will look at async operations later
+```sh
+bob@dylan:~$ npm run dev 1-redis_op.js 
+
+> queuing_system_in_js@1.0.0 dev /root
+> nodemon --exec babel-node --presets @babel/preset-env "1-redis_op.js"
+
+[nodemon] 2.0.4
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `babel-node --presets @babel/preset-env 1-redis_op.js`
+Redis client connected to the server
+School
+Reply: OK
+100
+^C
+
 bob@dylan:~$
 ```
